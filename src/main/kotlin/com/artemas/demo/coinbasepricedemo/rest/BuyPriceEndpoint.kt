@@ -1,6 +1,7 @@
 package com.artemas.demo.coinbasepricedemo.rest
 
 import com.artemas.demo.coinbasepricedemo.domain.Price
+import org.springframework.http.HttpHeaders.AUTHORIZATION
 import org.springframework.http.MediaType.TEXT_EVENT_STREAM_VALUE
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestHeader
@@ -15,7 +16,7 @@ import java.time.Duration.ofSeconds
 class BuyPriceEndpoint(val webClient: WebClient = create()) {
 
     @GetMapping("/buy-price", produces = [TEXT_EVENT_STREAM_VALUE])
-    fun getBuyPrice(@RequestHeader("Authorization") bearerToken: String): Flux<Price> {
+    fun getBuyPrice(@RequestHeader(AUTHORIZATION) bearerToken: String): Flux<Price> {
         return interval(ofSeconds(1))
             .flatMap {
                 webClient.get()
