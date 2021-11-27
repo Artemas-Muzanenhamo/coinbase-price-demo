@@ -1,6 +1,10 @@
 package com.artemas.demo.coinbasepricedemo.domain
 
-data class Price(
+data class Data(
     val amount: String,
     val currency: String
+)
+
+data class Price(
+    val data: Data
 )
